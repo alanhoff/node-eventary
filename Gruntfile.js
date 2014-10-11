@@ -57,9 +57,9 @@ module.exports = function(grunt) {
     'run:mocha'
   ]);
 
+  // This is the command that Travis will run
   grunt.registerTask('travis', [
     'test',
-    'run:hint',
     'run:istanbul',
     'run:coveralls'
   ]);
