@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         args: [
           './node_modules/istanbul/lib/cli.js',
           'cover',
-          './node_modules/mocha/bin/mocha',
+          './node_modules/mocha/bin/_mocha',
           '--report',
           'lcovonly',
           '--',
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
       // Send coverage results to Coveralls
       coveralls: {
         exec: 'cat ./coverage/lcov.info | ' +
-          './node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage'
+          './node_modules/coveralls/bin/coveralls.js'
       }
     }
   });
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 
   // This is the command that Travis will run
   grunt.registerTask('travis', [
-    'test',
+    'run:hint',
     'run:istanbul',
     'run:coveralls'
   ]);
