@@ -5,7 +5,7 @@ module.exports = function(grunt) {
       // Run all the tests inside the test folder
       mocha: {
         args: [
-          './node_modules/.bin/mocha',
+          './node_modules/mocha/bin/mocha',
           './test/**/test-*.js',
           '--reporter',
           'spec',
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       // Look for JavaScript errors
       hint: {
         args: [
-          './node_modules/.bin/jshint',
+          './node_modules/jshint/bin/jshint',
           './lib',
           './test',
           './examples',
@@ -24,17 +24,12 @@ module.exports = function(grunt) {
         ],
       },
 
-      // Generate the documentation
-      doc: {
-        args: ['./node_modules/.bin/yuidoc', './lib', '--outdir', './doc'],
-      },
-
       // Runs test coverages
       istanbul: {
         args: [
-          './node_modules/.bin/istanbul',
+          './node_modules/istanbul/lib/cli.js',
           'cover',
-          './node_modules/.bin/mocha',
+          './node_modules/mocha/bin/mocha',
           '--report',
           'lcovonly',
           '--',
