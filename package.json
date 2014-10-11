@@ -1,6 +1,6 @@
 {
   "name": "eventary",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A little helper that aids on the building of middlewares and pluggables applications.",
   "main": "./lib/eventary.js",
   "directories": {

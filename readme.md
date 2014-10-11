@@ -6,8 +6,8 @@
 [![DevDependencies Status](https://david-dm.org/alanhoff/node-eventary/dev-status.png)](https://david-dm.org/alanhoff/node-eventary)
 
 
-Eventary is a little library that helps you to implement power event systems,
-middleware oriented codes and pluggable systems.
+Eventary is a little library that helps you to implement powerful event
+systems, middleware oriented codes and pluggable/extensible modules.
 
 ### Examples
 
@@ -20,6 +20,7 @@ var events = new Eventary();
 
 // We will listen for 'uppercase' events
 events.hook('uppercase', function(event) {
+
   // Let's transform this data to uppercase
   event.data = event.data.toUpperCase();
 });
@@ -27,6 +28,7 @@ events.hook('uppercase', function(event) {
 // Now let's emit some events
 events.dispatch('uppercase', 'this is sad because is lowercase.')
   .then(function(data) {
+
     // Whoooa! Uppercase data! This must be magic!
     console.log(data);
   });
@@ -35,18 +37,17 @@ events.dispatch('uppercase', 'this is sad because is lowercase.')
 But wait, there is more, we can have async hooks too!
 
 ```javascript
-// With a second argument, we tell Eventary
+// With a second argument we tell Eventary
 // that this magic is async
 events.hook('async', function(event, promise) {
 
-  // Yes, that's right, we use promises keep the
-  // hook chain in order
+  // Yes, that's right, we use promises to keep the
+  // hook chain in order when the magic is async
 
   setTimeout(function() {
     event.data = event.data.toUpperCase();
 
-    // Hey Eventary, I'm ready with this hook
-    // so please mode on.
+    // Hey Eventary, I'm ready with this hook please mode on.
     promise.resolve();
   }, 1000);
 });
@@ -54,16 +55,18 @@ events.hook('async', function(event, promise) {
 // Now let's emit some events
 events.dispatch('uppercase', 'this is sad because is lowercase.')
   .then(function(data) {
+
     // Whoooa! Uppercase data! This must be magic!
     console.log(data);
   }).catch(function(err) {
+
     // Ooops, better call Saul.
     throw err;
   });
 ```
 
-`"My EventEmitter can do this too."` you would said, so here is an example
-with an `http.Server` with middlewares and highly pluggable.
+`"My EventEmitter can do this too."` you would say, so here is an example
+implementing `http.Server` with middlewares and highly pluggable events.
 
 ```javascript
 var Eventary = require('eventary');
@@ -73,8 +76,7 @@ var http = require('http');
 // We will listen the main page
 events.hook('/', function(event) {
 
-  // We don't need that this event continue to the
-  // 404 page
+  // We don't need that this event continue to the 404 page
   event.preventDefault();
 
   // Let's answer this incomming request
@@ -96,8 +98,9 @@ events.hook('/error', function() {
   throw new Error('Something bad happened!');
 });
 
-// Listen for EVERY routes
+// Listen for EVERY route
 events.hook('**', function(event) {
+
   // Just log it to the stdout
   console.log('HIT - ' + event.name);
 });
@@ -124,11 +127,11 @@ http.Server(function(req, res) {
 ### Testing
 
 Testing is easy, you need to have `grunt-cli` installed globally, clone this
-repository, `npm install` inside it and run `grunt test`.
+repository, `npm install` inside the folder and run `grunt test`.
 
 ### Todos
 
-* Add comments inline with [the code](lib/eventary.js).
+* Add comments inline inside [the code](lib/eventary.js).
 * Add browser support.
 * Write down [the API](api.md).
 * Write moar fancy stuff.
