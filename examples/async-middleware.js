@@ -7,7 +7,8 @@ var events = new Eventary();
 // This is the function that will scan our directory, note
 // the second argument, this is required if you want to peform
 // async operations inside the middleware
-var read = function(event, promise) {
+var read = function(event) {
+  var promise = Eventary.Promise.pending();
 
   // Scan the directory
   fs.readdir(event.data, function(err, files){
@@ -22,6 +23,8 @@ var read = function(event, promise) {
     // call this to tell Eventary to move on
     promise.resolve();
   });
+
+  return promise.promise;
 };
 
 
