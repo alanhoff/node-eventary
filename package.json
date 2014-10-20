@@ -1,6 +1,6 @@
 {
   "name": "eventary",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A little helper that aids on the building of middlewares and pluggables applications.",
   "main": "./lib/eventary.js",
   "directories": {
@@ -36,7 +36,6 @@
     "grunt-run": "^0.2.4",
     "istanbul": "^0.3.2",
     "jshint": "^2.5.6",
-    "mocha": "^1.21.4",
-    "mocha-lcov-reporter": "0.0.1"
+    "mocha": "^1.21.4"
   }
 }

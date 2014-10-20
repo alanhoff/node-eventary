@@ -39,8 +39,8 @@ But wait, there is more, we can have async hooks too!
 ```javascript
 // With a second argument we tell Eventary
 // that this magic is async
-events.hook('async', function(event, promise) {
-
+events.hook('async', function(event) {
+  var promise = Eventary.Promise.pending();
   // Yes, that's right, we use promises to keep the
   // hook chain in order when the magic is async
 
@@ -50,6 +50,8 @@ events.hook('async', function(event, promise) {
     // Hey Eventary, I'm ready with this hook please mode on.
     promise.resolve();
   }, 1000);
+
+  return promise.promise;
 });
 
 // Now let's emit some events
