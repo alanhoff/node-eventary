@@ -245,12 +245,15 @@ describe('System events testing', function() {
   it('should allow async hooks', function(done) {
     var events = new Eventary();
 
-    events.hook('system.*', function(event, promise) {
+    events.hook('system.*', function(event) {
+      var promise = Eventary.Promise.pending();
+
       setTimeout(function() {
+        event.data.name = event.name;
         promise.resolve();
       }, 500);
 
-      event.data.name = event.name;
+      return promise.promise;
     });
 
     events.dispatch('system.test', {
